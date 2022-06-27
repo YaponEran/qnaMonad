@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Operations
   module Questions
     class Destroy
@@ -23,7 +25,6 @@ module Operations
         question.destroy!
         Success()
       end
-
     end
   end
 end

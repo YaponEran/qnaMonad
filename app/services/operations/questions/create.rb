@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Operations
   module Questions
     class Create
@@ -23,7 +25,6 @@ module Operations
       rescue ActiveRecord::RecordNotUnique
         Failure[:uniqueness_violation, {}]
       end
-
     end
   end
 end

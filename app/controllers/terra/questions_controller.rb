@@ -26,10 +26,26 @@ module Terra
       end
     end
 
-    def show
+    def show;end
+
+    def edit
+      @question = Question.find(params[:id])
     end
 
     def update
+      @question = Question.find(params[:id])
+
+      operation = Operations::Questions::Update.new
+      result = operation.call(@question, question_params)
+
+      case result
+      in Success
+        flash[:notice] = "Question successfully updated"
+        redirect_to terra_questions_path
+      in Failure[error, payload]
+        flash[:error] = "Something went wrong"
+        redirect_to terra_questions_path
+      end
     end
 
     def destroy
