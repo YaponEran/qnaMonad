@@ -49,6 +49,19 @@ module Terra
     end
 
     def destroy
+      @question = Question.find(params[:id])
+
+      operation = Operations::Questions::Destroy.new
+      result = operation.call(@question)
+
+      case result
+      in Success
+        flash[:notice] = "Question successesfully deleted!"
+        redirect_to terra_questions_path
+      in Failure[error, payload]
+        flash[:notice] = "Question successesfully deleted!"
+        redirect_to terra_questions_path
+      end
     end
 
     private
