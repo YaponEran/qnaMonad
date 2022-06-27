@@ -4,8 +4,8 @@ module Operations
       include Dry::Monads[:result, :do]
 
       def call(params)
-        validated_params = yield validate(params)
-        question = yield commit(validated_params.to_h)
+        validated_params = yield validate(params.to_h)
+        question = yield commit(validated_params)
         Success(question)
       end
 
@@ -17,7 +17,7 @@ module Operations
       end
 
       def commit(params)
-        question = Question.create!(params)
+        question = Question.create!(params.to_h)
 
         Success(question)
       rescue ActiveRecord::RecordNotUnique

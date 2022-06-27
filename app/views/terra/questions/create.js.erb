@@ -1,0 +1,15 @@
+var questionsContent = document.querySelector('.questions-content');
+console.log(questionsContent);
+
+questionsContent.insertAdjacentHTML('beforeEnd', '<%= j render @question %>');
+
+var questionForm = document.querySelector(".question-form")
+form = questionForm.querySelector("form")
+
+
+var modal = document.querySelectorAll(".modal")
+modal.forEach((element)=>{
+    element.classList.remove("is-active")
+})
+
+

@@ -1,0 +1,5 @@
+var question_error = document.querySelector('.er');
+
+<% if @payload %>
+    question_error.innerHTML = "<%= j render(partial: 'error', locals: { error: @error, payload: @payload }) %>" 
+<% end %>
