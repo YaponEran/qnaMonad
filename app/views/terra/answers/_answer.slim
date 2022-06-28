@@ -1,8 +1,8 @@
 .box
   -if answer.persisted?
     p= answer.body
-    =link_to "Edit", edit_terra_answer_path(answer), remote: true, class: "button is-warning is-light js-modal-trigger edit-answer=#{answer.id}", data: { target: "edit-answer=#{answer.id}" }
-    =link_to "Delete", terra_answer_path(answer), method: :delete, data: { confirm: "Are you sure?"}, class: "button is-danger is-light ml-2"
+    =link_to "Edit", edit_terra_answer_path(answer), remote: true, class: "button is-warning is-light is-small js-modal-trigger edit-answer=#{answer.id}", data: { target: "edit-answer=#{answer.id}" }
+    =link_to "Delete", terra_answer_path(answer), method: :delete, data: { confirm: "Are you sure?"}, class: "button is-danger is-light is-small ml-2"
 
 
 .modal id="edit-answer=#{answer.id}"
