@@ -6,14 +6,14 @@ module Operations
       def call(answer, params)
         validated_params = yield validate(params.to_h)
         answer = yield check_answer(answer)
-        result = yield commit(answer, params)
+        result = yield commit(answer, validated_params)
         Success(answer)
       end
 
       private
 
       def validate(params)
-        validation = Validations::Answer::Answer.new
+        validation = Validations::Answer::Update.new
         validation.call(params)
       end
 
@@ -26,7 +26,7 @@ module Operations
       end
 
       def commit(answer, params)
-        answer.update!(params)
+        answer.update!(params.to_h)
         Success()
       rescue ActiveRecord::RecordNotUnique
         Failure[:uniqueness_violation, {}]

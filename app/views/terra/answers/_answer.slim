@@ -1,0 +1,21 @@
+.box
+  -if answer.persisted?
+    p= answer.body
+    =link_to "Edit", edit_terra_answer_path(answer), remote: true, class: "button is-warning is-light js-modal-trigger edit-answer=#{answer.id}", data: { target: "edit-answer=#{answer.id}" }
+    =link_to "Delete", terra_answer_path(answer), method: :delete, data: { confirm: "Are you sure?"}, class: "button is-danger is-light ml-2"
+
+
+.modal id="edit-answer=#{answer.id}"
+  .modal-background
+  .modal-content
+    .box
+      = form_for [:terra, answer], local: true do |f|
+        .field
+          = f.label :body, class: "label"
+          .control
+            = f.text_area :body, class: "textarea"
+        .field.is-grouped
+          .control
+            =f.submit "Submit", class: "button is-primary"
+          .control
+            =link_to "Cancel", terra_question_path, class: "button"

@@ -3,3 +3,6 @@
   .notification.is-success.is-light
     h1.title = @question.title
     p.is-black = @question.body
+
+  = render @question.answers
+  = render "terra/answers/form"

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   namespace :terra do
-    resources :questions
+    resources :questions do
+      resources :answers, shallow: true
+    end
   end
 end
