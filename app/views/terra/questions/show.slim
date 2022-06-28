@@ -1,0 +1,5 @@
+.container
+  =link_to "Back", terra_questions_path, class: "button is-light mb-3"
+  .notification.is-success.is-light
+    h1.title = @question.title
+    p.is-black = @question.body
