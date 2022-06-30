@@ -1,0 +1,31 @@
+.container
+  .column.is-5
+    = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+
+      = render "users/shared/error_messages", resource: resource
+
+      .field
+        = f.label :email, class: "label"
+        .control
+          = f.email_field :email, class: "input"
+      .field
+        = f.label :password, class: "label"
+        .control
+          = f.password_field :password, class: "input"
+      .field
+        = f.label :firts_name, class: "label"
+        .control
+          = f.text_field :firts_name, class: "input"
+      .field
+        = f.label :last_name, class: "label"
+        .control
+          = f.text_field :last_name, class: "input"
+      .field
+        = f.label :country, class: "label"
+        .control
+          = f.text_field :country, class: "input"
+      .field.is-grouped
+        .control
+          =f.submit "Submit", class: "button is-primary"
+
+  = render "users/shared/links"

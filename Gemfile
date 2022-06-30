@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'bulma-rails', '~> 0.9.3'
+gem 'devise'
 gem 'dry-monads'
 gem 'dry-validation'
 gem 'rubocop-rails', require: false
