@@ -1,6 +1,7 @@
 module Terra
   class QuestionsController < BaseController
-
+    before_action :authenticate_user!
+    
     def index
       @questions = Question.all
       @question = Question.new

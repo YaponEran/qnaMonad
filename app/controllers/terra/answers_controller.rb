@@ -1,5 +1,6 @@
 module Terra
   class AnswersController < BaseController
+    before_action :authenticate_user!
 
     def new
       @answer = Answer.new

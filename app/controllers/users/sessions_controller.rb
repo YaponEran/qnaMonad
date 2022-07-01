@@ -6,6 +6,7 @@ module Users
 
     def after_sign_out_path_for(_resource)
       new_user_session_path
+      # new_terra_user_path
     end
   end
 end

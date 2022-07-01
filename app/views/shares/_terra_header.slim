@@ -1,7 +1,7 @@
-nav.navbar aria-label=("main navigation") role="navigation" 
+nav.navbar.is-dark aria-label=("main navigation") role="navigation" 
   .navbar-brand
-    a.navbar-item href="https://bulma.io" 
-      img height="28" src="https://bulma.io/images/bulma-logo.png" width="112" /
+    a.navbar-item href="http://localhost:3000/terra/questions" 
+      img height="28" src="https://bulma.io/images/bulma-logo-white.png" width="112" /
     a.navbar-burger aria-expanded="false" aria-label="menu" data-target="navbarBasicExample" role="button" 
       span aria-hidden="true" 
       span aria-hidden="true" 
@@ -27,9 +27,7 @@ nav.navbar aria-label=("main navigation") role="navigation"
             | Report an issue
     .navbar-end
       .navbar-item
-        .buttons
-          a.button.is-primary
-            strong
-              | Sign up
-          a.button.is-light
-            | Log in
+        -if user_signed_in?
+          / p = current_user.email
+          = link_to current_user.email, terra_user_path(current_user), class: "has-text-success"
+        = link_to "Log out", destroy_user_session_path, method: :delete, class: "button is-light ml-2"
