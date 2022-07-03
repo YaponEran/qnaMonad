@@ -1,0 +1,14 @@
+h1.title = "Author questions"
+
+- current_user.questions.each_with_index  do |question, index|
+  .notification.is-success
+    p.title.is-7 = index += 1
+    p.title.is-4 = question.title
+    p.title.is-4 = question.body
+
+h1.title = "Author Answers"
+- current_user.answers.each_with_index  do |answer, index|
+  .notification.is-warning
+    p.title.is-7 = index += 1
+    p.subtitle.is-7.has-text-grey = "To question answer created: #{answer.question.body}"
+    p.title.is-4 = answer.body

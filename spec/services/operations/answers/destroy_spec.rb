@@ -2,7 +2,8 @@ require "rails_helper"
 
 RSpec.describe Operations::Answers::Destroy, type: :service do 
   describe "#call" do
-    let!(:answer) { create(:answer) }
+    let!(:user) { create(:user) }
+    let!(:answer) { create(:answer, user: user) }
 
     context "when all params correct" do
       it "returns success" do
