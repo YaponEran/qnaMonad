@@ -1,5 +1,6 @@
 module Terra
   class UsersController < BaseController
+    before_action :authenticate_user!, only: [:show]
     def new
       @user = User.new
     end

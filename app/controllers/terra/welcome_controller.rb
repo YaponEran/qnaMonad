@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 module Terra
   class WelcomeController < BaseController
+    before_action :authenticate_user!
+    
     def index
       @main_content = {
         greeting: 'Welcome to the QNA app',
