@@ -9,7 +9,7 @@ module Terra
     def create
       @question = Question.find(params[:question_id])
       operation = Operations::Answers::Create.new
-      result = operation.call(answer_params.merge(question_id: @question.id))
+      result = operation.call(answer_params.merge(question_id: @question.id), current_user)
 
       case result
       in Success

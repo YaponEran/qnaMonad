@@ -13,7 +13,7 @@ module Terra
 
     def create
       operation = Operations::Questions::Create.new
-      result = operation.call(question_params)
+      result = operation.call(question_params, current_user)
 
       case result
       in Success

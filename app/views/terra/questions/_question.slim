@@ -2,13 +2,16 @@
   .box.mb-5
     .media
       .media-content
+        p.subtitle.is-7 = "author: #{question.user.email}" 
         .title. = question.title
         .subtitle.is-6 = question.body
-        =link_to "Show", terra_question_path(question), class: "button is-light mr-2"
+        =link_to "Check to answer", terra_question_path(question), class: "button is-light mr-2"
 
-        =link_to "Edit", edit_terra_question_path(question), remote: true, class: "button is-warning is-light mr-2 js-modal-trigger question-edit=#{question.id}", data: {target: "question-edit=#{question.id}"}
+        -if current_user.author_of?(question)
+          =link_to "Edit", edit_terra_question_path(question), remote: true, class: "button is-warning is-light mr-2 js-modal-trigger question-edit=#{question.id}", data: {target: "question-edit=#{question.id}"}
         
-        =link_to "Delete", terra_question_path(question), method: :delete, data: {confirm: "Are you sure?"}, class: "button is-danger is-light"
+        -if current_user.author_of?(question)
+          =link_to "Delete", terra_question_path(question), method: :delete, data: {confirm: "Are you sure?"}, class: "button is-danger is-light"
 
     .modal id="question-edit=#{question.id}"
       .modal-background

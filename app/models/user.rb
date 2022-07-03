@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :questions, dependent: :destroy
+  has_many :answers, dependent: :destroy
   # has_one_attached :avatar
 
   COUNTRIES = [
@@ -17,5 +19,9 @@ class User < ApplicationRecord
     COUNTRIES.each do |c|
       country = c
     end
+  end
+
+  def author_of?(item)
+    item.user_id == id
   end
 end

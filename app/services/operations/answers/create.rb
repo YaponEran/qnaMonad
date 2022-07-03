@@ -3,10 +3,11 @@ module Operations
     class Create
       include Dry::Monads[:result, :do]
 
-      def call(params)
+      def call(params, user)
         validated_params = yield validate(params.to_h)
+        user = yield check_user(user)
         yield check_question(validated_params[:question_id])
-        answer = yield commit(validated_params)
+        answer = yield commit(validated_params.to_h.merge(user_id: user.id))
         
         Success(answer)
       end
@@ -16,6 +17,14 @@ module Operations
       def validate(params)
         validation = Validations::Answer::Answer.new
         validation.call(params)
+      end
+
+      def check_user(user_id)
+        user = User.find_by(id: user_id)
+
+        Success(user)
+      rescue ActiveRecord::RecordNotUnique
+        Failure[:user_not_found, {}]
       end
 
       def check_question(question_id)
