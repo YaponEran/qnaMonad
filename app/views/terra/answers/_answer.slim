@@ -1,13 +1,16 @@
 .box
   -if answer.persisted?
+    -if answer.best
+      p.tag.is-success.is-pulled-right = "Best answer"
     p.title.is-7 = "answer aythors: #{answer.user&.email}"
     p = answer.body
 
     -if current_user.author_of?(answer)
-      -if answer.best
-        p.has-text-success = "Best answer"
       =link_to "Edit", edit_terra_answer_path(answer), remote: true, class: "button is-warning is-light is-small js-modal-trigger edit-answer=#{answer.id}", data: { target: "edit-answer=#{answer.id}" }
+
       =link_to "Delete", terra_answer_path(answer), method: :delete, data: { confirm: "Are you sure?"}, class: "button is-danger is-light is-small ml-2"
+
+    -if current_user.author_of?(answer.question)
       =link_to "Best", choose_best_terra_answer_path(answer), method: :patch, class: "button is-success is-light is-small ml-2"
 
   p.subtitle.is-7.has-text-right.has-text-grey = answer.created_at.strftime("%Y-%m-%d")
