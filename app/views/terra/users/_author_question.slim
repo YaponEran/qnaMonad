@@ -1,4 +1,5 @@
-h1.title = "Author questions"
+-if current_user&.questions.exists?
+  h1.title = "#{current_user.firts_name}:  Questions"
 
 - current_user.questions.each_with_index  do |question, index|
   .notification.is-success
@@ -6,7 +7,8 @@ h1.title = "Author questions"
     p.title.is-4 = question.title
     p.title.is-4 = question.body
 
-h1.title = "Author Answers"
+-if current_user&.answers.exists?
+  h1.title = "#{current_user.firts_name}:  Answers"
 - current_user.answers.each_with_index  do |answer, index|
   .notification.is-warning
     p.title.is-7 = index += 1

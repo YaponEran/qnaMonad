@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   namespace :terra do
     root to: 'welcome#index'
     resources :questions do
-      resources :answers, shallow: true
+      resources :answers, shallow: true do
+        patch :choose_best, on: :member
+      end
     end
 
     resources :users

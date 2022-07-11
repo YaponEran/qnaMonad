@@ -28,5 +28,13 @@ nav.navbar.is-dark aria-label=("main navigation") role="navigation"
     .navbar-end
       .navbar-item
         -if user_signed_in?
+          .tag.is-small.is-danger.is-rounded.mr-2.is-7.ut = "Totoally items: #{current_user.questions.count + current_user.answers.count}"
+          
+          javascript:
+            var ut = document.querySelector(".ut")
+            setInterval(()=>{
+              ut.remove()
+            }, 3000)
+
           = link_to current_user.email, terra_user_path(current_user), class: "has-text-success"
           = link_to "Log out", destroy_user_session_path, method: :delete, class: "button is-light ml-2"

@@ -8,15 +8,16 @@ module Terra
 
     def create
       @question = Question.find(params[:question_id])
+
       operation = Operations::Answers::Create.new
       result = operation.call(answer_params.merge(question_id: @question.id), current_user)
 
       case result
       in Success
-        flash[:notice] = "Answer successfuly created"
-        redirect_to terra_question_path(@question)
+        @answer = @question.answers.last
+        render "create.js.erb", layout: false
       in Failure[error, payload]
-        flash[:error] = "Some thing went wrong"
+        flash[:error] = "Some thing went wrong: #{payload}"
         redirect_to terra_question_path(@question)
       end
     end
@@ -49,6 +50,22 @@ module Terra
         redirect_to terra_question_path(@answer.question)
       in Failure[error, payload]
         flash[:error] = "While destroy answer somethimg went wrog- #{error} : #{payload} "
+        redirect_to terra_question_path(@answer.question)
+      end
+    end
+
+    def choose_best
+      @answer = Answer.find_by(id: params[:id])
+
+      operation = Operations::Answers::BestAnswer.new
+      result = operation.call(@answer)
+      
+      case result
+      in Success
+        flash[:notice] = "Answer best successfuly updated"
+        redirect_to terra_question_path(@answer.question)
+      in Failure[error, payload]
+        flash[:error] = "While update best answer wen wrong - #{error} : #{payload}"
         redirect_to terra_question_path(@answer.question)
       end
     end
