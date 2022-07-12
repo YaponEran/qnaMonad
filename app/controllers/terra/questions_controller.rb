@@ -68,6 +68,36 @@ module Terra
       end
     end
 
+    def vote_up
+      @question = Question.find(params[:id])
+      operation = Operations::Votes::VoteUp.new
+      result = operation.call(@question, current_user)
+
+      case result
+      in Success
+        flash[:notice] = "Question vote successfully votes"
+        redirect_to terra_question_path
+      in Failure[error, payload]
+        flash[:error] = "While vote went something wrong: #{error} - #{payload}"
+        redirect_to terra_question_path
+      end
+    end
+
+    def vote_down
+      @question = Question.find(params[:id])
+      operation = Operations::Votes::VoteDown.new
+      result = operation.call(@question, current_user)
+
+      case result
+      in Success
+        flash[:notice] = "Successfuly unvoted"
+        redirect_to terra_question_path
+      in Failure[error, payload]
+        flash[:error] = "While unvoting went wrong: #{error} - #{payload}"
+        redirect_to terra_question_path
+      end
+    end
+
     private
     def question_params
       params.require(:question).permit(:title, :body)

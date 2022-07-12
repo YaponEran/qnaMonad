@@ -8,6 +8,7 @@
         th.title.is-5 = "Country"
         th.title.is-5 = "Answers"
         th.title.is-5 = "Questions"
+        th.title.is-5 = "Votes"
     tbody
       tr
         th.title.is-5 = current_user.email
@@ -16,6 +17,10 @@
         th.title.is-5 = current_user.country
         th.title.is-5 = current_user.answers.count
         th.title.is-5 = current_user.questions.count
-
+        -current_user.votes.each do |v|
+          -if v.value == 0
+            th.title.is-5 = "Not yet voted"
+          -else
+            th.title.is-5 = v.value
   = render "author_question"
         

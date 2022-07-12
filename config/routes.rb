@@ -7,8 +7,16 @@ Rails.application.routes.draw do
   # root to: 'welcome#index'
 
   namespace :terra do
+
+    concern :votable do
+      member do
+        patch :vote_up
+        patch :vote_down
+      end
+    end
+
     root to: 'welcome#index'
-    resources :questions do
+    resources :questions, concerns: [:votable] do
       resources :answers, shallow: true do
         patch :choose_best, on: :member
       end

@@ -1,9 +1,13 @@
 .container
   =link_to "Back", terra_questions_path, class: "button is-light mb-3 mt-3"
-  .notification.is-success.is-light
+  .notification.is-success.is-light style="padding: 40px"
+    p.tag.is-success.is-pulled-right = @question.rate
     p.title.is-7 = "Question author: #{@question.user.email}"
     h1.title = @question.title
     p.is-black = @question.body
+
+    =link_to "♥", vote_down_terra_question_path(@question), method: :patch, class: 'button is-small is-rounded is-warning is-pulled-right ml-7'
+    =link_to "♥", vote_up_terra_question_path(@question), method: :patch, class: 'button is-small is-rounded is-danger is-pulled-right mr-2'
 
   .answer-test{data-answer-question-id="#{@question.id}"}
     = render @question.answers

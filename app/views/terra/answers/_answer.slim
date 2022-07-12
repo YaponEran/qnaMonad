@@ -1,5 +1,6 @@
 .box
   -if answer.persisted?
+    p.tag.is-warning.is-pulled-right.ml-2 = answer.rate
     -if answer.best
       p.tag.is-success.is-pulled-right = "Best answer"
     p.title.is-7 = "answer aythors: #{answer.user&.email}"
