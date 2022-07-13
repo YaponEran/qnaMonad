@@ -40,7 +40,7 @@ module Operations
         elsif voted?(type, user)
           Failure["you already voted to: #{type.class}", {}]
         else
-          type.votes.update(user: user, value: 0)
+          type.votes.update(user: user, value: -1)
           type_rate_subtract(type)
           Success()
         end

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
     root to: 'welcome#index'
     resources :questions, concerns: [:votable] do
-      resources :answers, shallow: true do
+      resources :answers, concerns: [:votable], shallow: true do
         patch :choose_best, on: :member
       end
     end
