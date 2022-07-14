@@ -30,7 +30,8 @@ module Terra
     def show
       @question = Question.find(params[:id])
       @answer = Answer.new
-      @comment = @question.comments.new
+      # @question_comment = @question.comments
+      # @answer_commet = @question.answers.each { |a| a.comments }
     end
 
     def edit

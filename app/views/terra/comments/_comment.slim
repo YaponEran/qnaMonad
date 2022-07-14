@@ -1,0 +1,15 @@
+.control.mb-2
+  .tags.has-addons
+    .tag.is-info = "By: #{comment.user.email}"
+    .tag.is-dark.is-family-code = comment.body
+    -if current_user.author_of?(comment)
+      .tag.is-danger.is-family-code = "X"
+
+/ = form_for [:terra, comment], local: true do |f|
+/   .field
+/     = f.label :body, class: "label"
+/     .control
+/       = f.text_area :body, class: "textarea"
+/   .field.is-grouped
+/     .control
+/       =f.submit "Submit", class: "button is-small is-light"

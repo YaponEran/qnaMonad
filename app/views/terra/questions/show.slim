@@ -10,12 +10,19 @@
     =link_to "♥", vote_up_terra_question_path(@question), method: :patch, class: 'button is-small is-rounded is-danger is-pulled-right mr-2'
 
     hr
-    - if @question.comments
-      - @question.comments.each do |q|
-        p = q.body
-  
-    .question_comment.mt-4
-      = render 'terra/comments/form', comment: Comment.new, url: terra_question_comments_path(@question)
+    p.tag.is-primary.mb-2 = "Question comments"
+    -if @question.comments.any?
+      = render @question.comments
+
+    .p
+      .button.is-success.is-small.is-rounded.js-modal-trigger data-target="question-comment-modal=#{@question.id}" = "Add comment"
+
+    .modal id="question-comment-modal=#{@question.id}"
+      .modal-background
+      .modal-content
+        .box
+          .question_comment.mt-4
+            = render 'terra/comments/form', comment: Comment.new, url: terra_question_comments_path(@question)
 
   .answer-test{data-answer-question-id="#{@question.id}"}
     = render @question.answers

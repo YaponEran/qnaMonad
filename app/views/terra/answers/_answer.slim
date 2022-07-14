@@ -19,12 +19,21 @@
 
   p.subtitle.is-7.has-text-right.has-text-grey = answer.created_at.strftime("%Y-%m-%d")
 
-  - if answer.comments
-    - answer.comments.each do |c|
-      p = c.body
+  hr
+  p.tag.mb-2 = "Answer Comments"
+  -if answer.comments.any?
+    = render answer.comments
+  hr
 
-  .answer_comment_form
-    = render 'terra/comments/form', comment: Comment.new, url: terra_answer_comments_path(answer)
+  data
+  .button.is-warning.is-small.is-rounded.js-modal-trigger data-target="answer-comment-modal=#{answer.id}" = "Add comment"
+
+  .modal id="answer-comment-modal=#{answer.id}"
+    .modal-background
+    .modal-content
+      .answer_comment_form
+        .box
+          = render 'terra/comments/form', comment: Comment.new, url: terra_answer_comments_path(answer)
 
 
 .modal id="edit-answer=#{answer.id}"
