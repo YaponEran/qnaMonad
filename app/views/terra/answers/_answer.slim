@@ -19,6 +19,13 @@
 
   p.subtitle.is-7.has-text-right.has-text-grey = answer.created_at.strftime("%Y-%m-%d")
 
+  - if answer.comments
+    - answer.comments.each do |c|
+      p = c.body
+
+  .answer_comment_form
+    = render 'terra/comments/form', comment: Comment.new, url: terra_answer_comments_path(answer)
+
 
 .modal id="edit-answer=#{answer.id}"
   .modal-background

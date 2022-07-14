@@ -30,6 +30,7 @@ module Terra
     def show
       @question = Question.find(params[:id])
       @answer = Answer.new
+      @comment = @question.comments.new
     end
 
     def edit

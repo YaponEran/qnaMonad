@@ -9,6 +9,14 @@
     =link_to "♥", vote_down_terra_question_path(@question), method: :patch, class: 'button is-small is-rounded is-warning is-pulled-right ml-7'
     =link_to "♥", vote_up_terra_question_path(@question), method: :patch, class: 'button is-small is-rounded is-danger is-pulled-right mr-2'
 
+    hr
+    - if @question.comments
+      - @question.comments.each do |q|
+        p = q.body
+  
+    .question_comment.mt-4
+      = render 'terra/comments/form', comment: Comment.new, url: terra_question_comments_path(@question)
+
   .answer-test{data-answer-question-id="#{@question.id}"}
     = render @question.answers
   .answer-form{data-answer-form="#{@question.id}"}

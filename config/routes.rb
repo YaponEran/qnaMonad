@@ -15,9 +15,13 @@ Rails.application.routes.draw do
       end
     end
 
+    concern :commentable do
+      resources :comments, only: [:create, :update, :destroy]
+    end
+
     root to: 'welcome#index'
-    resources :questions, concerns: [:votable] do
-      resources :answers, concerns: [:votable], shallow: true do
+    resources :questions, concerns: [:votable, :commentable] do
+      resources :answers, concerns: [:votable, :commentable], shallow: true do
         patch :choose_best, on: :member
       end
     end
