@@ -41,6 +41,21 @@ module Terra
       end
     end
 
+    def destroy
+      @comment = Comment.find_by(id: params[:id])
+      operation = Operations::Comments::Destroy.new
+      result = operation.call(@comment)
+
+      case result
+      in Success
+        flash[:notice] = "Comment successfuly deleted"
+        render "destroy.js.erb", layout: false
+      in Failure[error, payload]
+        flash[:error] = "While delete comment went wrong: #{error} - #{payload}"
+        render "destroy.js.erb", layout: false
+      end
+    end
+
     private
 
     def comment_params

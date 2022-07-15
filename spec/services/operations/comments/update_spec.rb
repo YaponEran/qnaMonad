@@ -16,6 +16,11 @@ RSpec.describe Operations::Comments::Update, type: :service do
         result = subject.call(comment, params)
         expect(result).to be_a(Dry::Monads::Success)
       end
+
+      it "updated comment body" do
+        result = subject.call(comment, params)
+        expect(result.value!.body).to eq("An updated comment body")
+      end
     end
   end
 end
