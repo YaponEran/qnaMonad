@@ -27,6 +27,10 @@
               =f.label :body, class: "label"
               .control
                 =f.text_area :body, class: "textarea"
+            .field
+              = f.label :images, class: "label"
+              .control
+                = f.file_field :images, multiple: true, class: "file-label"
             .field.is-grouped
               .control
                 =f.submit "Update", class: "button is-primary"

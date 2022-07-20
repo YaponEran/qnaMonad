@@ -25,14 +25,16 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 gem 'bulma-rails', '~> 0.9.3'
 gem 'devise'
+gem "gon"
 gem 'dry-monads'
 gem 'dry-validation'
 gem 'rubocop-rails', require: false
 gem 'slim-rails'
+gem 'active_storage_validations'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

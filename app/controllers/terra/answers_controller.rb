@@ -16,6 +16,15 @@ module Terra
       in Success
         @answer = @question.answers.last
         render "create.js.erb", layout: false
+        # AnswerChannel.broadcast_to(
+        #   "question_answers_#{@question.id}",
+        #   {
+        #     user_id: current_user.id,
+        #     question_id: @question.id,
+        #     body: answer_params[:body]
+        #   }
+        # )
+        # head :ok
       in Failure[error, payload]
         flash[:error] = "Some thing went wrong: #{payload}"
         redirect_to terra_question_path(@question)

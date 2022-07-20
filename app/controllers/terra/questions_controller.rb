@@ -28,8 +28,9 @@ module Terra
     end
 
     def show
-      @question = Question.find(params[:id])
+      @question = Question.with_attached_images.find(params[:id])
       @answer = Answer.new
+      # gon.question_id = @question
       # @question_comment = @question.comments
       # @answer_commet = @question.answers.each { |a| a.comments }
     end
@@ -102,7 +103,7 @@ module Terra
 
     private
     def question_params
-      params.require(:question).permit(:title, :body)
+      params.require(:question).permit(:title, :body, images: [])
     end
   end
 end

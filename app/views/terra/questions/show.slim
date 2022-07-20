@@ -6,6 +6,10 @@
     h1.title = @question.title
     p.is-black = @question.body
 
+    
+    - @question.images.each do |img|
+      = image_tag img, width: 200, height: 200, class: "mr-2"
+      
     =link_to "♥", vote_down_terra_question_path(@question), method: :patch, class: 'button is-small is-rounded is-warning is-pulled-right ml-7'
     =link_to "♥", vote_up_terra_question_path(@question), method: :patch, class: 'button is-small is-rounded is-danger is-pulled-right mr-2'
 

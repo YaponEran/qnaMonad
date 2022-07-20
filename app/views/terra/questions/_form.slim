@@ -1,15 +1,17 @@
 = form_for [:terra, @question], remote: true do |f|
-  
   .er
-    
   .field
-    =f.label :title, class: "label"
+    = f.label :title, class: "label"
     .control
-      =f.text_field :title, class: "input"
+      = f.text_field :title, class: "input"
   .field
-    =f.label :body, class: "label"
+    = f.label :body, class: "label"
     .control
-      =f.text_area :body, class: "textarea"
+      = f.text_area :body, class: "textarea"
+  .field
+    = f.label :images, class: "label"
+    .control
+      = f.file_field :images, multiple: true, class: "file-label"
   .field.is-grouped
     .control
       =f.submit "Submit", class: "button is-primary"

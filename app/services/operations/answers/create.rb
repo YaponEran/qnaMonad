@@ -6,9 +6,11 @@ module Operations
       def call(params, user)
         validated_params = yield validate(params.to_h)
         user = yield check_user(user)
-        yield check_question(validated_params[:question_id])
+        question = yield check_question(validated_params[:question_id])
         answer = yield commit(validated_params.to_h.merge(user_id: user.id))
         
+        # yield broadcat_answer_create_listener(user, question, validated_params[:body])
+
         Success(answer)
       end
 
@@ -41,6 +43,11 @@ module Operations
         Success(answer)
       rescue ActiveRecord::RecordNotUnique
         Failure[:uniqueness_violation, {}]
+      end
+
+      def broadcat_answer_create_listener(user, question, body)
+
+        # ActionCable.server.broadcast("question_answers_#{question.id}", { user_id: user.id, question_id: question.id, body: body })
       end
     end
   end

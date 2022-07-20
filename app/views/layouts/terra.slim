@@ -7,6 +7,7 @@ html
     = csp_meta_tag
     = javascript_pack_tag 'terra', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'terra', 'data-turbolinks-track': 'reload'
+    = Gon::Base.render_data
   body
     =render "shares/terra_header"
     
