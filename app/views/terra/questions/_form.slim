@@ -1,0 +1,19 @@
+= form_for [:terra, @question], remote: true do |f|
+  .er
+  .field
+    = f.label :title, class: "label"
+    .control
+      = f.text_field :title, class: "input"
+  .field
+    = f.label :body, class: "label"
+    .control
+      = f.text_area :body, class: "textarea"
+  .field
+    = f.label :images, class: "label"
+    .control
+      = f.file_field :images, multiple: true, class: "file-label"
+  .field.is-grouped
+    .control
+      =f.submit "Submit", class: "button is-primary"
+    .control
+      =link_to "Cancel", terra_questions_path,  class: "button is-light"

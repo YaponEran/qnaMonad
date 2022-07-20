@@ -1,0 +1,23 @@
+var questionsContent = document.querySelector('.questions-content');
+
+questionsContent.insertAdjacentHTML('beforeEnd', '<%= j render @question %>');
+
+var questionForm = document.querySelector(".question-form")
+form = questionForm.querySelector("form")
+
+
+var media1 = form.getElementsByTagName("input")[0]
+media1.value = ""
+
+var media2 = form.getElementsByTagName("textarea")[0]
+media2.value = ""
+
+
+
+
+var modal = document.querySelectorAll(".modal")
+modal.forEach((element)=>{
+    element.classList.remove("is-active")
+})
+
+

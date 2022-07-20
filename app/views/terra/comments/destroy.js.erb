@@ -1,0 +1,5 @@
+var comment = document.querySelectorAll('[data-comment-delete-id="<%= @comment.id %>"]')
+
+comment.forEach((c)=>{
+    c.remove()
+})

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Operations
   module Questions
     class Update
       include Dry::Monads[:result, :do]
 
       def call(question, params)
-        validated_params = yield validate(params)
+        validated_params = yield validate(params.to_h)
         yield check_question(question)
         result = yield commit(question, params.to_h)
         Success(question)
@@ -33,7 +35,6 @@ module Operations
       rescue ActiveRecord::RecordNotUnique
         Failure[:uniqueness_violation, {}]
       end
-
     end
   end
 end

@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title
+      | Terra
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_pack_tag 'terra', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'terra', 'data-turbolinks-track': 'reload'
+    = Gon::Base.render_data
+  body
+    =render "shares/terra_header"
+    
+    - flash.each do |type, msg|
+      .notification class="#{type == 'error' ? 'is-danger' : 'is-success'}"
+        = msg
+    = yield

@@ -1,0 +1,21 @@
+.container
+  .column.is-5
+    -if @questions.empty?
+      .box.is-info
+        .medis
+          p= "This is Questions list page! Please add some question to start app. I wou'd like to enjoy this app for playing asking answering many typed of theme. Want wish you good luck! 🙌"
+
+  .questions-content
+    =render @questions
+
+  .button.is-primary.is-light.js-modal-trigger data-target="question-create-form"
+    = "Add Question"
+
+
+  .modal id="question-create-form"
+    .modal-background
+    .modal-content
+      .box
+        h1.title = "Add question form"
+        .question-form
+          =render "form"

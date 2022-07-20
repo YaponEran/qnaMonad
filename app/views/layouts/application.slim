@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title
+      | Terra
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'terra', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'terra', 'data-turbolinks-track': 'reload'
+  body
+    = yield
+
+
+/ <%# <!DOCTYPE html> %>
+/ <%# <html> %>
+/   <%# <head> %>
+/     <%# <title>Terra</title> %>
+/     <%# <%= csrf_meta_tags %>
+/     <%# <%= csp_meta_tag %> 
+
+/     <%# <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %> 
+/     <%# <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %> 
+/   <%# </head> %>
+
+/   <%# <body> %>
+/     <%# <%= yield %>
+/   <%# </body> %>
+/ <%# </html> %>

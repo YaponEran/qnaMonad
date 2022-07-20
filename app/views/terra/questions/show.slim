@@ -1,0 +1,34 @@
+.container
+  =link_to "Back", terra_questions_path, class: "button is-light mb-3 mt-3"
+  .notification.is-success.is-light style="padding: 40px"
+    p.tag.is-success.is-pulled-right = @question.rate
+    p.title.is-7 = "Question author: #{@question.user.email}"
+    h1.title = @question.title
+    p.is-black = @question.body
+
+    
+    - @question.images.each do |img|
+      = image_tag img, width: 200, height: 200, class: "mr-2"
+      
+    =link_to "♥", vote_down_terra_question_path(@question), method: :patch, class: 'button is-small is-rounded is-warning is-pulled-right ml-7'
+    =link_to "♥", vote_up_terra_question_path(@question), method: :patch, class: 'button is-small is-rounded is-danger is-pulled-right mr-2'
+
+    hr
+    p.tag.is-primary.mb-2 = "Question comments"
+    -if @question.comments.any?
+      = render @question.comments
+
+    .p
+      .button.is-success.is-small.is-rounded.js-modal-trigger data-target="question-comment-modal=#{@question.id}" = "Add comment"
+
+    .modal id="question-comment-modal=#{@question.id}"
+      .modal-background
+      .modal-content
+        .box
+          .question_comment.mt-4
+            = render 'terra/comments/form', comment: Comment.new, url: terra_question_comments_path(@question)
+
+  .answer-test{data-answer-question-id="#{@question.id}"}
+    = render @question.answers
+  .answer-form{data-answer-form="#{@question.id}"}
+    = render "terra/answers/form"

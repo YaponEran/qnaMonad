@@ -1,0 +1,38 @@
+-if question
+  .box.mb-5
+    .media
+      .media-content
+        p.subtitle.is-7 = "author: #{question.user.email}" 
+        .title. = question.title
+        .subtitle.is-6 = question.body
+        =link_to "Check to answer", terra_question_path(question), class: "button is-light mr-2"
+
+        -if current_user.author_of?(question)
+          =link_to "Edit", edit_terra_question_path(question), remote: true, class: "button is-warning is-light mr-2 js-modal-trigger question-edit=#{question.id}", data: {target: "question-edit=#{question.id}"}
+        
+        -if current_user.author_of?(question)
+          =link_to "Delete", terra_question_path(question), method: :delete, data: {confirm: "Are you sure?"}, class: "button is-danger is-light"
+
+    .modal id="question-edit=#{question.id}"
+      .modal-background
+      .modal-content
+        .box
+          h1.title = "Update question form"
+          = form_for [:terra, question], local: true do |f|
+            .field
+              =f.label :title, class: "label"
+              .control
+                =f.text_field :title, class: "input"
+            .field
+              =f.label :body, class: "label"
+              .control
+                =f.text_area :body, class: "textarea"
+            .field
+              = f.label :images, class: "label"
+              .control
+                = f.file_field :images, multiple: true, class: "file-label"
+            .field.is-grouped
+              .control
+                =f.submit "Update", class: "button is-primary"
+              .control
+                =link_to "Cancel", terra_questions_path,  class: "button is-light"

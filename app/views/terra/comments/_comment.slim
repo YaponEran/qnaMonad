@@ -1,0 +1,25 @@
+.comment-body{data-comment-delete-id="#{comment.id}"}
+  .control.mb-2
+    .tags.has-addons
+      .tag.is-info = "By: #{comment.user.email}"
+      .tag.is-dark.is-family-code = comment.body
+      -if current_user.author_of?(comment)
+        .tag.is-warning.is-family-code.js-modal-trigger data-target="comment-edit-modal=#{comment.id}" = "edit"
+      -if current_user.author_of?(comment)
+        -if comment.commentable_type == "Answer"
+          = link_to "Delete", terra_comment_path(comment), method: :delete, remote: true, data: { confirm: "Are you sure" }, class: "tag is-danger"
+        -if comment.commentable_type == "Question"
+          = link_to "Delete", terra_comment_path(comment), method: :delete, remote: true, data: { confirm: "Are you sure" }, class: "tag is-danger"
+
+  .modal id="comment-edit-modal=#{comment.id}"
+    .modal-background
+    .modal-content
+      .box
+        = form_for [:terra, comment], local: true do |f|
+          .field
+            = f.label :body, class: "label"
+            .control
+              = f.text_area :body, class: "textarea"
+          .field.is-grouped
+            .control
+              =f.submit "Submit", class: "button is-small is-light"

@@ -1,0 +1,16 @@
+-if current_user&.questions.exists?
+  h1.title = "#{current_user.firts_name}:  Questions"
+
+- current_user.questions.each_with_index  do |question, index|
+  .notification.is-success
+    p.title.is-7 = index += 1
+    p.title.is-4 = question.title
+    p.title.is-4 = question.body
+
+-if current_user&.answers.exists?
+  h1.title = "#{current_user.firts_name}:  Answers"
+- current_user.answers.each_with_index  do |answer, index|
+  .notification.is-warning
+    p.title.is-7 = index += 1
+    p.subtitle.is-7.has-text-grey = "To question answer created: #{answer.question.body}"
+    p.title.is-4 = answer.body

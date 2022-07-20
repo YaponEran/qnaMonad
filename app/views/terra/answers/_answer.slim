@@ -1,0 +1,52 @@
+.box#answer_channel_provider data-id=answer.id
+  -if answer.persisted?
+    p.tag.is-warning.is-pulled-right.ml-2 = answer.rate
+    -if answer.best
+      p.tag.is-success.is-pulled-right = "Best answer"
+    p.title.is-7 = "answer aythors: #{answer.user&.email}"
+    p = answer.body
+
+    -if current_user.author_of?(answer)
+      =link_to "Edit", edit_terra_answer_path(answer), remote: true, class: "button is-warning is-light is-small js-modal-trigger edit-answer=#{answer.id}", data: { target: "edit-answer=#{answer.id}" }
+
+      =link_to "Delete", terra_answer_path(answer), method: :delete, data: { confirm: "Are you sure?"}, class: "button is-danger is-light is-small ml-2"
+
+    -if current_user.author_of?(answer.question)
+      =link_to "Best", choose_best_terra_answer_path(answer), method: :patch, class: "button is-success is-light is-small ml-2"
+
+    =link_to "♥", vote_down_terra_answer_path(answer), method: :patch, class: 'button is-small is-rounded is-light is-warning is-pulled-right ml-7'
+    =link_to "♥", vote_up_terra_answer_path(answer), method: :patch, class: 'button is-small is-rounded is-danger is-light is-pulled-right mr-2'
+
+  p.subtitle.is-7.has-text-right.has-text-grey = answer.created_at.strftime("%Y-%m-%d")
+
+  hr
+  p.tag.mb-2 = "Answer Comments"
+  -if answer.comments.any?
+    = render answer.comments
+  hr
+
+  data
+  .button.is-warning.is-small.is-rounded.js-modal-trigger data-target="answer-comment-modal=#{answer.id}" = "Add comment"
+
+  .modal id="answer-comment-modal=#{answer.id}"
+    .modal-background
+    .modal-content
+      .answer_comment_form
+        .box
+          = render 'terra/comments/form', comment: Comment.new, url: terra_answer_comments_path(answer)
+
+
+.modal id="edit-answer=#{answer.id}"
+  .modal-background
+  .modal-content
+    .box
+      = form_for [:terra, answer], local: true do |f|
+        .field
+          = f.label :body, class: "label"
+          .control
+            = f.text_area :body, class: "textarea"
+        .field.is-grouped
+          .control
+            =f.submit "Submit", class: "button is-primary"
+          .control
+            =link_to "Cancel", terra_question_path(answer.question), class: "button"

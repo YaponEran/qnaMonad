@@ -1,0 +1,40 @@
+nav.navbar.is-dark aria-label=("main navigation") role="navigation" 
+  .navbar-brand
+    a.navbar-item href="http://localhost:3000/terra/questions" 
+      img height="28" src="https://bulma.io/images/bulma-logo-white.png" width="112" /
+    a.navbar-burger aria-expanded="false" aria-label="menu" data-target="navbarBasicExample" role="button" 
+      span aria-hidden="true" 
+      span aria-hidden="true" 
+      span aria-hidden="true" 
+  #navbarBasicExample.navbar-menu
+    .navbar-start
+      a.navbar-item
+        | Home
+      a.navbar-item
+        | Documentation
+      .navbar-item.has-dropdown.is-hoverable
+        a.navbar-link
+          | More
+        .navbar-dropdown
+          a.navbar-item
+            | About
+          a.navbar-item
+            | Jobs
+          a.navbar-item
+            | Contact
+          hr.navbar-divider/
+          a.navbar-item
+            | Report an issue
+    .navbar-end
+      .navbar-item
+        -if user_signed_in?
+          .tag.is-small.is-danger.is-rounded.mr-2.is-7.ut = "Totoally items: #{current_user.questions.count + current_user.answers.count}"
+          
+          javascript:
+            var ut = document.querySelector(".ut")
+            setInterval(()=>{
+              ut.remove()
+            }, 3000)
+
+          = link_to current_user.email, terra_user_path(current_user), class: "has-text-success"
+          = link_to "Log out", destroy_user_session_path, method: :delete, class: "button is-light ml-2"

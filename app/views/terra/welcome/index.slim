@@ -1,0 +1,11 @@
+section.hero.is-black
+  .hero-body
+    .container
+      p.title
+        = @main_content[:greeting]
+      p.subtitle
+        = @main_content[:start]
+      =link_to "Get started", terra_questions_path, class: "button is-primary"
+
+.figure.image.is-5by3
+  img.is-narrow-desktop src="#{@main_content[:img]}"

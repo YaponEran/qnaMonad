@@ -1,0 +1,16 @@
+var question_answer_id = document.querySelector('[data-answer-question-id="<%= @question.id %>"]');
+question_answer_id.insertAdjacentHTML('beforeEnd', '<%= j render @answer %>')
+
+var answer_success_message = document.createElement('div');
+answer_success_message.className = 'tag is-success mb-5';
+answer_success_message.innerHTML = 'answer successfully created';
+
+question_answer_id.appendChild(answer_success_message);
+
+setTimeout(function() {
+  answer_success_message.remove();
+}, 2000);
+
+var answer_form = document.querySelector('[data-answer-form="<%= @question.id %>"]');
+var form_attributes = answer_form.querySelector("form")
+form_attributes.reset();
